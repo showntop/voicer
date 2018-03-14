@@ -64,98 +64,27 @@ window.Editor = Backbone.View.extend
   initDropzoneSource: ->
     self = @
 
-    source_dropzone = $('.topic-source-dropzone')
-    source_dropzone.on 'paste', (event) =>
-      self.handlePaste(event)
 
-    dropzone = source_dropzone.dropzone(
-      url: "/voices"
-      dictDefaultMessage: ""
-      clickable: true
-      paramName: "file"
-      maxFilesize: 20
-      uploadMultiple: false
-      headers:
-        "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
-      previewContainer: false
-      processing: ->
-        # $(".div-dropzone-alert").alert "close"
-        $("#source-preview").hide()
-        if $("#source-preview").parent().find("span.loading").length == 0
-          $("#source-preview").before("<span class='loading'><i style='color: red;' class='fa fa-circle-o-notch fa-spin'></i></span>")
-      dragover: ->
-        # editor.addClass "div-dropzone-focus"
-        return
-      dragleave: ->
-        # editor.removeClass "div-dropzone-focus"
-        return
-      drop: ->
-        # editor.removeClass "div-dropzone-focus"
-        # editor.focus()
-        return
-      success: (header, res) ->
-        $('.form input[name="topic[source]"]').val(res.url)
-        $('#source-preview img').attr('src',res.url)
-        return
-      error: (temp, msg) ->
-        App.alert(msg)
-        return
-      totaluploadprogress: (num) ->
-        return
-      sending: ->
-        return
-      queuecomplete: ->
-        $("#source-preview").parent().find("span.loading").remove()
-        $("#source-preview").show()
-        return
-    )
 
   initDropzoneEditor: ->
     self = @
-    editor = $("textarea.topic-editor")
-    editor.wrap "<div class=\"topic-editor-dropzone\"></div>"
 
-    editor_dropzone = $('.topic-editor-dropzone')
-    editor_dropzone.on 'paste', (event) =>
-      self.handlePaste(event)
+    $.ajax
+      url: '/uptokens'
+      success: (res) ->
+        token = res.token
+        domain = res.domain
+        config = {}
+          # disableStatisticsReport: false
+          # retryCount: 5
+          # region: qiniu.region.z2
+        putExtra = {}
+          # fname: ''
+          # params: {}
+          # mimeType: null
 
-    dropzone = editor_dropzone.dropzone(
-      url: "/photos"
-      dictDefaultMessage: ""
-      clickable: true
-      paramName: "file"
-      maxFilesize: 20
-      uploadMultiple: false
-      headers:
-        "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
-      previewContainer: false
-      processing: ->
-        $(".div-dropzone-alert").alert "close"
-        self.showUploading()
-      dragover: ->
-        editor.addClass "div-dropzone-focus"
+        uploadWithSDK(token, putExtra, config, domain)
         return
-      dragleave: ->
-        editor.removeClass "div-dropzone-focus"
-        return
-      drop: ->
-        editor.removeClass "div-dropzone-focus"
-        editor.focus()
-        return
-      success: (header, res) ->
-        self.appendImageFromUpload([res.url])
-        return
-      error: (temp, msg) ->
-        App.alert(msg)
-        return
-      totaluploadprogress: (num) ->
-        return
-      sending: ->
-        return
-      queuecomplete: ->
-        self.restoreUploaderStatus()
-        return
-    )
 
   uploadFile: (item, filename) ->
     self = @
@@ -263,4 +192,35 @@ window.Editor = Backbone.View.extend
       window._emojiModal = new EmojiModalView()
     window._emojiModal.show()
     false
+
+  uploadWithSDK = (token, putExtra, config, domain) ->
+    $('#select2').unbind('change').bind 'change', ->
+      file = @files[0]
+      observable = undefined
+      if file
+        key = file.name
+       
+        # putExtra.params['x:name'] = key.split('.')[0]
+        # 设置next,error,complete对应的操作，分别处理相应的进度信息，错误信息，以及完成后的操作
+
+        error = (err) ->
+          alert '上传出错'
+          return
+
+        complete = (res) ->
+          return
+
+        next = (response) ->
+          return
+
+        subObject = 
+          next: next
+          error: error
+          complete: complete
+        subscription = undefined
+        # 调用sdk上传接口获得相应的observable，控制上传和暂停
+        observable = qiniu.upload(file, key, token, putExtra, config)
+        observable.subscribe(subObject)
+      return
+    return
 

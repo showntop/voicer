@@ -251,6 +251,7 @@ ActiveRecord::Schema.define(version: 20170302084611) do
     t.integer "user_id", null: false
     t.integer "node_id", null: false
     t.string "title", null: false
+    t.string "cover", null: false
     t.string "source", null: false
     t.text "body", null: false
     t.text "summary"
