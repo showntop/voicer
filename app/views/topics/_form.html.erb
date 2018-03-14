@@ -15,22 +15,24 @@
   </div>
 
   <div class="row" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px;margin-left: 1px;margin-right: 1px;">
-    <div id="cover-preview" class="col-md-2 col-xs-2" style="position: relative; padding-left: 0px;">
+    <div class="col-md-2 col-xs-2" style="position: relative; padding-left: 0px;">
       <%= f.hidden_field :cover %>
-      <img class="needsclick dz-clickable topic-cover-dropzone" style="width: 99px; height: 99px; border-style: none;" src="<%= @topic.cover %>" />
-      <h5 style="
-      position: absolute;
-      top: 40;
-      left: 40;
-      height: 20px;
-      line-height: 20px;
-      width: 30px;
-      text-align: center;">封面</h5>
+      <div id="cover-preview">
+        <img class="needsclick dz-clickable topic-cover-dropzone" style="width: 99px; height: 99px; border-style: none;" src="<%= @topic.cover %>" />
+        <h5 style="
+        position: absolute;
+        top: 40;
+        left: 40;
+        height: 20px;
+        line-height: 20px;
+        width: 30px;
+        text-align: center;">封面</h5>
+      </div>
     </div>  
 
-    <div id="source-preview" class="col-xs-10 col-md-10" style="position: relative;">
+    <div class="col-xs-10 col-md-10" style="position: relative;">
       <%= f.hidden_field :source %>
-      <div style="
+      <div id="source-preview" style="
       background-color: grey;
       position: absolute;
       height: 99px;

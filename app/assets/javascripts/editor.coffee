@@ -31,7 +31,9 @@ window.Editor = Backbone.View.extend
       previewContainer: false
       processing: ->
         # $(".div-dropzone-alert").alert "close"
-        # self.showUploading()
+        $("#cover-preview").hide()
+        if $("#cover-preview").parent().find("span.loading").length == 0
+          $("#cover-preview").before("<span class='loading'><i style='color: red;' class='fa fa-circle-o-notch fa-spin'></i></span>")
       dragover: ->
         # editor.addClass "div-dropzone-focus"
         return
@@ -54,7 +56,8 @@ window.Editor = Backbone.View.extend
       sending: ->
         return
       queuecomplete: ->
-        # self.restoreUploaderStatus()
+        $("#cover-preview").parent().find("span.loading").remove()
+        $("#cover-preview").show()
         return
     )  
 
@@ -77,7 +80,9 @@ window.Editor = Backbone.View.extend
       previewContainer: false
       processing: ->
         # $(".div-dropzone-alert").alert "close"
-        # self.showUploading()
+        $("#source-preview").hide()
+        if $("#source-preview").parent().find("span.loading").length == 0
+          $("#source-preview").before("<span class='loading'><i style='color: red;' class='fa fa-circle-o-notch fa-spin'></i></span>")
       dragover: ->
         # editor.addClass "div-dropzone-focus"
         return
@@ -100,7 +105,8 @@ window.Editor = Backbone.View.extend
       sending: ->
         return
       queuecomplete: ->
-        # self.restoreUploaderStatus()
+        $("#source-preview").parent().find("span.loading").remove()
+        $("#source-preview").show()
         return
     )
 
