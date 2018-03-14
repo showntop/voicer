@@ -158,7 +158,7 @@ module Api
       # @param body [String] 回帖内容，[required]
       # @return [ReplySerializer] 创建的回帖信息
       def create_replies
-        doorkeeper_authorize!
+        #doorkeeper_authorize!
 
         requires! :body
 

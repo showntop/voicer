@@ -1,10 +1,10 @@
 require 'sidekiq/web'
 
 Rails.application.routes.draw do
-  use_doorkeeper do
-    controllers applications: 'oauth/applications',
-                authorized_applications: 'oauth/authorized_applications'
-  end
+  # use_doorkeeper do
+  #   controllers applications: 'oauth/applications',
+  #               authorized_applications: 'oauth/authorized_applications'
+  # end
 
   resources :comments
   resources :devices
