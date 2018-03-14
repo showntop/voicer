@@ -8,7 +8,7 @@ default: &default
 # PRODUCTION
 #
 production:
-  url: postgres://osufhsypspuvov:45c9656c83899f33395eb651f17de96bb82c8504728b5af0392f43526720b5d8@ec2-107-20-224-137.compute-1.amazonaws.com:5432/d69g8pn8nqa1ms
+  url: postgres://zzkuuqasmvsdej:5fdbc7d18ab486e7b538c93850702bd41b4801d7b10e969757156951cca1b55b@ec2-54-221-212-15.compute-1.amazonaws.com:5432/dfcdfml8h7t58r
   # adapter: postgresql
   # host: localhost
   # password: 7b4c4dc076a38ea8a882e73840e92c3930ef5e4954ba1d2b0a336e2734df35f7
