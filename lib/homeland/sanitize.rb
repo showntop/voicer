@@ -19,17 +19,17 @@ module Homeland
       return if node["src"].blank?
 
       # Youtube
-      if node["src"].match?(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/})
+      if node["src"].match(%r{\A(?:https?:)?//(?:www\.)?youtube(?:-nocookie)?\.com/embed/}).present?
         valid_video_url = true
       end
 
       # Vimeo
-      if node["src"].match?(%r{\Ahttps://player\.vimeo\.com/video/})
+      if node["src"].match(%r{\Ahttps://player\.vimeo\.com/video/}).present?
         valid_video_url = true
       end
 
       # Youku
-      if node["src"].match?(%r{\A(?:http[s]{0,1}?:)?//player\.youku\.com/embed/})
+      if node["src"].match(%r{\A(?:http[s]{0,1}?:)?//player\.youku\.com/embed/}).present?
         valid_video_url = true
       end
 
