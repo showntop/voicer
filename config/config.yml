@@ -50,7 +50,7 @@ defaults: &defaults
   profile_fields: 'company,twitter,website,tagline,location,alipay,paypal,qq,weibo,wechat,douban,dingding,aliwangwang,facebook,instagram,dribbble,battle_tag,psn_id,steam_id'
   app_name: "Hivoice"
   # domain: "localhost:3000"
-  domain: "hidden-meadow-49311.herokuapp.com"
+  domain: "voicer-2018.herokuapp.com"
   https: false
   default_locale: 'zh-CN'
   auto_locale: false
@@ -71,7 +71,7 @@ defaults: &defaults
   mailer_options:
     address: ''
     port: 25
-    domain: 'hidden-meadow-49311.herokuapp.com'
+    domain: 'voicer-2018.herokuapp.com'
     # domain: 'localhost:3000'
     user_name: ''
     password: ''
