@@ -1,0 +1,62 @@
+<%= render 'node_selector', node: @topic.node %>
+
+<%= simple_form_for @topic, remote: true, html: { class: "form topic-form", tb: 'edit-topic' } do |f| %>
+  <%= render "shared/error_messages", target: @topic %>
+  <%= f.hidden_field :node_id %>
+
+  <div class="form-group">
+    <div class="input-group">
+      <div class="input-group-btn">
+        <button type="button" class="btn btn-default" id="node-selector-button"
+                data-toggle="modal" data-target="#node-selector"><%= @topic.node&.name || '选择节点...' %></button>
+      </div>
+      <%= f.text_field :title, class: "form-control", placeholder: "在这里填写标题" %>
+    </div>
+  </div>
+
+  <div id="cover-preview" class="needsclick dz-clickable topic-cover-dropzone" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px; position: relative;">
+    <%= f.hidden_field :cover %>
+    <img style="width: 99px; height: 99px; border-style: none;" src="<%= @topic.cover %>" />
+    <h5 style="position: absolute;
+    top: 30px;
+    height: 20px;
+    left: 35px;
+    line-height: 20px;
+    width: 30px;
+    text-align: center;">封面</h5>
+  </div>  
+
+  <div id="source-preview" class="needsclick dz-clickable topic-source-dropzone" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px; position: relative;">
+    <%= f.hidden_field :source %>
+    <h5 style="position: absolute;
+    top: 30px;
+    height: 20px;
+    left: 35px;
+    line-height: 20px;
+    width: 30px;
+    text-align: center;">voice</h5>
+    <audio src="<%=  @topic.source %>" controls="controls" style="left: 70px;">
+      Your browser does not support the audio element.
+    </audio>
+  </div>
+
+  <%= render "/shared/editor_toolbar" %>
+  <div class="form-group">
+    <%= f.text_area :body, class: "topic-editor form-control closewarning", rows: 20 %>
+  </div>
+
+  <% if Setting.has_module?(:team) %>
+    <% if current_user.team_collection.any? %>
+    <div class='form-group'>
+      <%= f.input :team_id, collection: current_user.team_collection, include_blank: '不要关联组织' %>
+    </div>
+    <% end %>
+  <% end %>
+
+  <div class="form-group hide-ios">
+    <%= f.submit t("common.save"), class: "btn btn-primary col-xs-2", 'data-disable-with' => t("common.saving"), 'data-tb' => "save-topic" %>
+
+    <div class="pull-right hide-ios"><a href="/markdown" target="_blank"><i class="fa fa-tip"></i> 排版说明</a></div>
+  </div>
+<% end %>
+

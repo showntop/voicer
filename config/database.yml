@@ -1,0 +1,32 @@
+default: &default
+  adapter: postgresql
+  pool: 64
+  timeout: 5000
+  encoding: utf-8
+
+#
+# PRODUCTION
+#
+production:
+  url: postgres://osufhsypspuvov:45c9656c83899f33395eb651f17de96bb82c8504728b5af0392f43526720b5d8@ec2-107-20-224-137.compute-1.amazonaws.com:5432/d69g8pn8nqa1ms
+  # adapter: postgresql
+  # host: localhost
+  # password: 7b4c4dc076a38ea8a882e73840e92c3930ef5e4954ba1d2b0a336e2734df35f7
+  pool: 64
+  timeout: 5000
+  encoding: utf-8
+  # database: dfu5ajcj2hhl06
+
+#
+# Development specific
+#
+development:
+  <<: *default
+  database: voices-dev
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: voices-test

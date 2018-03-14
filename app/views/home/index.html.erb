@@ -1,0 +1,74 @@
+<%= raw Setting.index_html %>
+
+<div class="row home_headline_topics">
+  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      <div class="content-block">
+        <div class="title">头条</div>
+        <!-- Place somewhere in the <body> of your page -->
+        <div id="slider" class="flexslider">
+          <ul class="slides">
+            <% Topic.headline.each do |t| %>
+                <li >
+                  <%= link_to(main_app.topic_path(t), title: t.title) do %>
+                    <img src="<%= t.cover %>" width="750" height="340" style="width: 100%; height: 340px; overflow: hidden;"/>
+                    <%= t.title %>
+                  <% end %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+  </div>
+
+  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+    <div class="content-block">
+      <div class="title">推荐阅读</div>
+      <div class="recommend-topic">
+        <% Topic.recommend.first(5).each do |t| %>
+          <div class="row recommend-topic-item">
+            <%= link_to(main_app.topic_path(t), title: t.title, class: "col-xs-12 col-sm-12 col-md-2 col-lg-2") do %>
+              <img src="<%= t.cover %>" />
+            <% end %>
+            <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 recommend-topic-info">
+              <%= link_to(main_app.topic_path(t), title: t.title) do %>
+                <%= t.title %>
+              <% end %>
+              <p><%= t.created_at.strftime("%Y·%m·%d %H:%M") %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row home_excellent_topics item-list">
+      <% Node.all.each do |nd| %>
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+          <div class="content-block node-block">
+            <div class="title"><%= nd.name %></div>
+            <div class="recommend-topic">
+              <% Topic.where(node_id: nd.id).first(8).each do |t| %>
+                <div class="row recommend-topic-item">
+                  <%= link_to(main_app.topic_path(t), title: t.title, class: "col-xs-12 col-sm-12 col-md-3 col-lg-3") do %>
+                    <img src="<%= t.cover %>"/>
+                  <% end %>
+                  <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 recommend-topic-info">
+                    <%= link_to(main_app.topic_path(t), title: t.title) do %>
+                      <%= t.title %>
+                    <% end %>
+                    <p><%= t.created_at.strftime("%Y·%m·%d %H:%M") %></p>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+      <% end %>
+</div>
+
+<% if !mobile? %>
+  <%= render "/shared/index_sections" %>
+  <%= render "/shared/hot_locations" %>
+<% end %>

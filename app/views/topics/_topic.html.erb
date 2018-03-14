@@ -1,0 +1,51 @@
+<% cache([topic, topic.user_avatar_raw, suggest]) do %>
+  <div class="topic topic-profile row topic-<%= topic.id %>">
+    <div class="cover-container col-xs-12 col-sm-12 col-md-2 col-lg-2">
+      <%= link_to(main_app.topic_path(topic), title: topic.title) do %>
+        <img src="<%= topic.cover %>" class="topic-cover"/>
+      <% end %>
+    </div>
+
+    <div class="col-xs-10 col-sm-10 col-md-9 col-lg-9">
+      <div class="row topic-content">
+        <div class="topic-main">
+          <div class="topic-title">
+            <%= link_to(main_app.topic_path(topic), title: topic.title) do %>
+              <%= raw content_tag(:span, topic.node_name, class: 'node') %>
+              <%= topic.title %>
+            <% end %>
+            <% if suggest %>
+              <i class="fa fa-angle-double-up" title="置顶"></i>
+            <% end %>
+
+            <%= topic_excellent_tag(topic) %>
+            <%= topic_close_tag(topic) %>
+          </div>
+          <p><%= "#{topic.summary}......" %></p>
+        </div>
+      </div>
+    </div> 
+
+
+    <div class="topic-user col-xs-2 col-sm-2 col-md-1 col-lg-1">
+      <%= user_avatar_tag(topic.user, :md) %>
+      <div class="info">
+        <%= user_name_tag(topic.user) %>
+        <span class="hidden-mobile">
+          <% if true or topic.last_reply_user_login.blank? %>
+            <%= raw t("common.created_at", time: timeago(topic.created_at))%>
+          <% else %>
+            <%= t("common.last_by")%> <%= user_name_tag(topic.last_reply_user_login) %> <%= raw t("common.reply_at", time: timeago(topic.replied_at))%>
+          <% end %>
+        </span>
+        •
+        <span class="topic-reply-count">
+          <% if topic.replies_count > 0 %>
+            <%= link_to("#{topic.replies_count}回复","#{main_app.topic_path(topic)}#reply-#{topic.last_reply_id}", class: "state-false") %>
+          <% end %>
+        </span>
+      </div>
+    </div>
+ 
+  </div>
+<% end %>

@@ -1,0 +1,47 @@
+.topics {
+	background-color: #e5e5e5;
+}
+
+.topic-profile {
+	padding: 5px;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	background-color: #FAFAFA;
+
+	.cover-container{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	.topic-cover {
+		width: 100%; 
+		height: 80px;
+	}
+
+	@media (max-width: 600px) {
+		.topic-cover {
+			min-width: 300px;
+			width: 100%; 
+			height: 280px;
+		}
+	}
+
+	.topic-content {
+		padding: 5px;		
+	}
+
+	.topic-user {
+		padding: 5px;
+		top: 0px;
+		right: 0px;
+
+		.info {
+			font-style: oblique;
+		  	color: #8f8d8b;
+		  	font-size: 2px; 
+		  	margin-top: 0;
+		  	a { 
+		  		color: #797776; 
+		  	}
+		}
+	}
+}

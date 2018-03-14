@@ -1,0 +1,54 @@
+<% if false %>
+  <% if current_user && current_user.newbie? %>
+    <div class="panel panel-default">
+      <div class="panel-heading">新手必读</div>
+      <div class="panel-body">
+        <%= raw Setting.newbie_notices %>
+      </div>
+    </div>
+  <% else %>
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <%= link_to t('topics.new_topic'), main_app.new_topic_path, class: 'btn btn-primary btn-block' %>
+      </div>
+    </div>
+  <% end %>
+<% end %>
+
+<%= render "topics/sidebar_box_tips" %>
+
+<%= raw Setting.topic_index_sidebar_html %>
+
+<% cache(["sidebar_statistics",Time.now.strftime("%Y-%m-%d %H")]) do %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= t("common.vip_user")%></div>
+    <div class="panel-body recommend_users">
+          <% User.without_team.fields_for_list.hot.limit(10).each do |user| %>
+            <div class="row">
+              <div class="media user-card">
+                <div class="media-left"><%= user_avatar_tag(user, :md) %></div>
+                <div class="media-body">
+                  <div class="media-heading"><%= user_name_tag(user) %></div>
+                  <div class="infos">
+                    <div class="item opts"><%= follow_user_tag(user, class: "") %></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          <% end %>
+    </div>
+  </div>
+<% end %>
+
+<% if false %>
+  <% cache(["sidebar_statistics",Time.now.strftime("%Y-%m-%d %H")]) do %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= t("common.statics")%></div>
+    <ul class="list-group">
+      <li class="list-group-item">社区会员: <%= User.unscoped.count %> 人</li>
+      <li class="list-group-item">帖子数: <%= Topic.unscoped.count %> 个</li>
+      <li class="list-group-item">回帖数: <%= Reply.unscoped.count %> 条</li>
+    </ul>
+  </div>
+  <% end %>
+<% end %>
