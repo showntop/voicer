@@ -30,8 +30,8 @@ gem 'jquery-atwho-rails'
 gem 'font-awesome-rails'
 
 # OAuth Provider
-gem 'doorkeeper'
-gem 'doorkeeper-i18n'
+# gem 'doorkeeper'
+# gem 'doorkeeper-i18n'
 
 gem 'bulk_insert'
 
