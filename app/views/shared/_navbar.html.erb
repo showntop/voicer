@@ -2,10 +2,6 @@
   <ul class="nav navbar-nav">
     <%= render_list_items do |li|
       li << link_to(t("menu.home"), Setting.has_module?(:home) ? main_app.root_path : main_app.topics_path)
-      li << link_to('前言资讯', '/topics/section1')
-      li << link_to('区块链技术', '/topics/section2')
-      li << link_to('区块链应用', '/topics/section3')
-
       Homeland.navbar_plugins.each do |plugin|
         li << link_to(plugin.display_name, plugin.root_path) if Setting.has_module?(plugin.name)
       end

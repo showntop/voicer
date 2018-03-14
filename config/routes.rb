@@ -11,7 +11,8 @@ Rails.application.routes.draw do
   resources :teams
 
   if Setting.has_module?(:home)
-    root to: 'home#index'
+    # root to: 'home#index'
+    root to: 'topics#index'
   else
     root to: 'topics#index'
   end
