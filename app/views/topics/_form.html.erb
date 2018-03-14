@@ -14,31 +14,40 @@
     </div>
   </div>
 
-  <div id="cover-preview" class="needsclick dz-clickable topic-cover-dropzone" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px; position: relative;">
-    <%= f.hidden_field :cover %>
-    <img style="width: 99px; height: 99px; border-style: none;" src="<%= @topic.cover %>" />
-    <h5 style="position: absolute;
-    top: 30px;
-    height: 20px;
-    left: 35px;
-    line-height: 20px;
-    width: 30px;
-    text-align: center;">封面</h5>
-  </div>  
+  <div class="row" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px;margin-left: 1px;margin-right: 1px;">
+    <div id="cover-preview" class="col-md-2 col-xs-2" style="position: relative; padding-left: 0px;">
+      <%= f.hidden_field :cover %>
+      <img class="needsclick dz-clickable topic-cover-dropzone" style="width: 99px; height: 99px; border-style: none;" src="<%= @topic.cover %>" />
+      <h5 style="
+      position: absolute;
+      top: 40;
+      left: 40;
+      height: 20px;
+      line-height: 20px;
+      width: 30px;
+      text-align: center;">封面</h5>
+    </div>  
 
-  <div id="source-preview" class="needsclick dz-clickable topic-source-dropzone" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px; position: relative;">
-    <%= f.hidden_field :source %>
-    <h5 style="position: absolute;
-    top: 30px;
-    height: 20px;
-    left: 35px;
-    line-height: 20px;
-    width: 30px;
-    text-align: center;">voice</h5>
-    <audio src="<%=  @topic.source %>" controls="controls" style="left: 70px;">
-      Your browser does not support the audio element.
-    </audio>
+    <div id="source-preview" class="col-xs-10 col-md-10" style="position: relative;">
+      <%= f.hidden_field :source %>
+      <div style="
+      background-color: grey;
+      position: absolute;
+      height: 99px;
+      width: 99px;
+      color: red;
+      line-height: 99px;
+      text-align: center;"
+      class="needsclick dz-clickable topic-source-dropzone">
+        选取voice文件
+      </div>
+      <audio src="<%=  @topic.source %>" controls="controls" style="left: 120px; position: absolute; top: 40px;">
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
   </div>
+
 
   <%= render "/shared/editor_toolbar" %>
   <div class="form-group">
