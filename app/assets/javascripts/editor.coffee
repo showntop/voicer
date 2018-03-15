@@ -198,7 +198,7 @@ window.Editor = Backbone.View.extend
       file = @files[0]
       observable = undefined
       if file
-        key = file.name
+        key = "voices/"+file.name
        
         # putExtra.params['x:name'] = key.split('.')[0]
         # 设置next,error,complete对应的操作，分别处理相应的进度信息，错误信息，以及完成后的操作
@@ -208,6 +208,10 @@ window.Editor = Backbone.View.extend
           return
 
         complete = (res) ->
+          url = "http://" + domain + "/" + res.key
+          console.log url
+          $('.form input[name="topic[source]"]').val(url)
+          $('#source-preview audio').attr('src', url)
           return
 
         next = (response) ->
