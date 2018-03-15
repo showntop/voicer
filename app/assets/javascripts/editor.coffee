@@ -63,12 +63,6 @@ window.Editor = Backbone.View.extend
 
   initDropzoneSource: ->
     self = @
-
-
-
-  initDropzoneEditor: ->
-    self = @
-
     $.ajax
       url: '/uptokens'
       success: (res) ->
@@ -82,9 +76,77 @@ window.Editor = Backbone.View.extend
           # fname: ''
           # params: {}
           # mimeType: null
-
-        uploadWithSDK(token, putExtra, config, domain)
+        $('#select2').unbind('change').bind 'change', ->
+          file = @files[0]
+          observable = undefined
+          if file
+            key = "voices/"+file.name
+            # 设置next,error,complete对应的操作，分别处理相应的进度信息，错误信息，以及完成后的操作
+            subObject = 
+              next: (response) ->
+                return
+              error: (err) ->
+                alert '上传出错'
+                return
+              complete: (res) ->
+                url = "http://" + domain + "/" + res.key
+                console.log url
+                $('.form input[name="topic[source]"]').val(url)
+                $('#source-preview audio').attr('src', url)
+                return
+            subscription = undefined
+            # 调用sdk上传接口获得相应的observable，控制上传和暂停
+            observable = qiniu.upload(file, key, token, putExtra, config)
+            observable.subscribe(subObject)
+          return
         return
+
+  initDropzoneEditor: ->
+    self = @
+    editor = $("textarea.topic-editor")
+    editor.wrap "<div class=\"topic-editor-dropzone\"></div>"
+
+    editor_dropzone = $('.topic-editor-dropzone')
+    editor_dropzone.on 'paste', (event) =>
+      self.handlePaste(event)
+
+    dropzone = editor_dropzone.dropzone(
+      url: "/photos"
+      dictDefaultMessage: ""
+      clickable: true
+      paramName: "file"
+      maxFilesize: 20
+      uploadMultiple: false
+      headers:
+        "X-CSRF-Token": $("meta[name=\"csrf-token\"]").attr("content")
+      previewContainer: false
+      processing: ->
+        $(".div-dropzone-alert").alert "close"
+        self.showUploading()
+      dragover: ->
+        editor.addClass "div-dropzone-focus"
+        return
+      dragleave: ->
+        editor.removeClass "div-dropzone-focus"
+        return
+      drop: ->
+        editor.removeClass "div-dropzone-focus"
+        editor.focus()
+        return
+      success: (header, res) ->
+        self.appendImageFromUpload([res.url])
+        return
+      error: (temp, msg) ->
+        App.alert(msg)
+        return
+      totaluploadprogress: (num) ->
+        return
+      sending: ->
+        return
+      queuecomplete: ->
+        self.restoreUploaderStatus()
+        return
+    )
 
   uploadFile: (item, filename) ->
     self = @
@@ -192,39 +254,4 @@ window.Editor = Backbone.View.extend
       window._emojiModal = new EmojiModalView()
     window._emojiModal.show()
     false
-
-  uploadWithSDK = (token, putExtra, config, domain) ->
-    $('#select2').unbind('change').bind 'change', ->
-      file = @files[0]
-      observable = undefined
-      if file
-        key = "voices/"+file.name
-       
-        # putExtra.params['x:name'] = key.split('.')[0]
-        # 设置next,error,complete对应的操作，分别处理相应的进度信息，错误信息，以及完成后的操作
-
-        error = (err) ->
-          alert '上传出错'
-          return
-
-        complete = (res) ->
-          url = "http://" + domain + "/" + res.key
-          console.log url
-          $('.form input[name="topic[source]"]').val(url)
-          $('#source-preview audio').attr('src', url)
-          return
-
-        next = (response) ->
-          return
-
-        subObject = 
-          next: next
-          error: error
-          complete: complete
-        subscription = undefined
-        # 调用sdk上传接口获得相应的observable，控制上传和暂停
-        observable = qiniu.upload(file, key, token, putExtra, config)
-        observable.subscribe(subObject)
-      return
-    return
 

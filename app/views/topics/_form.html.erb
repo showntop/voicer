@@ -15,31 +15,40 @@
   </div>
 
   <div class="row" style="height: 100px;border-color: #CFCFCF; border-width: 1px; border-style: solid; margin-bottom: 10px;margin-left: 1px;margin-right: 1px;">
-    <div class="col-md-2 col-xs-2" style="position: relative; padding-left: 0px;">
+    <div class="col-md-2 col-xs-2" style="padding-left: 0px;">
       <%= f.hidden_field :cover %>
-      <div id="cover-preview">
+      <div id="cover-preview" style="position: relative;">
         <img class="needsclick dz-clickable topic-cover-dropzone" style="width: 99px; height: 99px; border-style: none;" src="<%= @topic.cover %>" />
-        <h5 style="
+        <h5 class="topic-cover-dropzone" style="
         position: absolute;
-        top: 40;
-        left: 40;
+        top: 35px;
+        left: 10px;
         height: 20px;
         line-height: 20px;
-        width: 30px;
-        text-align: center;">封面</h5>
+        width: 80px;
+        background-color: #F5F5F5;
+        z-index: 1000;
+        cursor: pointer;
+        text-align: center;
+        opacity: 0.5;">选取封面</h5>
       </div>
     </div>  
 
-    <div class="col-xs-10 col-md-10" style="position: relative;">
+    <div class="col-xs-10 col-md-10">
       <%= f.hidden_field :source %>
-      <div id="source-preview">
-        <audio src="<%=  @topic.source %>" controls="controls" 
-          style="left: 120px; position: absolute; top: 40px;">
-          Your browser does not support the audio element.
-        </audio>
-        <input class="file-input" type="file" id="select2" 
-        style="position: absolute; z-index: 1; width: 100px; height: 100px; background-color: blue;"></input>
+      <div id="source-preview" class="row" style="display: inline-flex;">
+        <div class="">
+          <h4>优美的歌声</h4>
+          <audio src="<%=  @topic.source %>" controls="controls">
+            Your browser does not support the audio element.
+          </audio>
+        </div>
+        <div >
+            <input type="file" id="select2" accept="audio/*"  style="margin-top: 50px;
+    margin-left: 20px;"></input>
+        </div>
       </div>
+
     </div>
 
   </div>
