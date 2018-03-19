@@ -83,7 +83,7 @@ module Api
 
         raise AccessDenied.new("当前登录的用户没有发帖权限，具体请参考官网的相关说明。") unless can?(:create, Topic)
 
-        @topic = current_user.topics.new(title: params[:title], body: params[:body])
+        @topic = current_user.topics.new(title: params[:title], body: params[:body], cover: params[:cover], source: params[:source])
         @topic.node_id = params[:node_id]
         @topic.save!
 
