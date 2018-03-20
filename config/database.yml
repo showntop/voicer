@@ -16,13 +16,26 @@ production:
   timeout: 5000
   encoding: utf-8
   # database: dfu5ajcj2hhl06
+#
+
+# PRODUCTION
+#
+development:
+  url: postgres://zzkuuqasmvsdej:5fdbc7d18ab486e7b538c93850702bd41b4801d7b10e969757156951cca1b55b@ec2-54-221-212-15.compute-1.amazonaws.com:5432/dfcdfml8h7t58r
+  # adapter: postgresql
+  # host: localhost
+  # password: 7b4c4dc076a38ea8a882e73840e92c3930ef5e4954ba1d2b0a336e2734df35f7
+  pool: 64
+  timeout: 5000
+  encoding: utf-8
+  # database: dfu5ajcj2hhl06
 
 #
 # Development specific
 #
-development:
-  <<: *default
-  database: voices-dev
+# development:
+#   <<: *default
+#   database: voices-dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

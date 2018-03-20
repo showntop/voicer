@@ -126,6 +126,8 @@ Rails.application.routes.draw do
     namespace :v3 do
       get 'hello', to: 'root#hello'
 
+      post 'wechat/login', to: 'wechat#login_signup'
+
       resource :devices
       resource :likes
       resources :nodes

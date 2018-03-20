@@ -42,6 +42,7 @@ GEM
       tzinfo (~> 1.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
+    aes (0.5.0)
     aliyun-oss-sdk (0.1.8)
       addressable
       gyoku
@@ -443,6 +444,7 @@ PLATFORMS
 
 DEPENDENCIES
   action-store
+  aes (~> 0.5.0)
   auto-space
   better_errors
   bootstrap-sass (~> 3.3.7)
@@ -474,6 +476,7 @@ DEPENDENCIES
   jbuilder
   jquery-atwho-rails
   jquery-rails
+  json
   kaminari
   kgio
   letter_avatar
@@ -499,6 +502,7 @@ DEPENDENCIES
   redis
   redis-namespace
   redis-objects
+  rest-client (~> 2.0, >= 2.0.2)
   rspec-rails
   rubocop (= 0.47.1)
   ruby-push-notifications

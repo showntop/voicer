@@ -28,7 +28,8 @@ gem 'http_accept_language'
 gem 'twemoji'
 gem 'jquery-atwho-rails'
 gem 'font-awesome-rails'
-
+gem 'json'
+gem 'aes', '~> 0.5.0'
 # OAuth Provider
 # gem 'doorkeeper'
 # gem 'doorkeeper-i18n'
@@ -117,7 +118,7 @@ gem 'rack-utf8_sanitizer'
 
 gem 'exception-track'
 gem 'status-page'
-
+gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'bundler-audit', require: false
 
 # Homeland Plugins
