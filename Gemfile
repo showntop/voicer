@@ -33,6 +33,7 @@ gem 'aes', '~> 0.5.0'
 # OAuth Provider
 # gem 'doorkeeper'
 # gem 'doorkeeper-i18n'
+gem 'jwt'
 
 gem 'bulk_insert'
 

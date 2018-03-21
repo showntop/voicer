@@ -256,6 +256,8 @@ class InitPgDb < ActiveRecord::Migration[4.2]
       t.string   'website'
       t.string   'company'
       t.string   'github'
+      t.string   'openid'
+      t.string   'opentype'
       t.string   'twitter'
       t.string   'qq'
       t.string   'avatar'
@@ -289,6 +291,7 @@ class InitPgDb < ActiveRecord::Migration[4.2]
       t.integer  'follower_ids',           default: [],                 array: true
     end
 
+    add_index 'users', ['openid'], name: 'index_users_on_openid', using: :btree
     add_index 'users', ['email'], name: 'index_users_on_email', using: :btree
     add_index 'users', ['location'], name: 'index_users_on_location', using: :btree
     add_index 'users', ['login'], name: 'index_users_on_login', using: :btree

@@ -477,6 +477,7 @@ DEPENDENCIES
   jquery-atwho-rails
   jquery-rails
   json
+  jwt
   kaminari
   kgio
   letter_avatar

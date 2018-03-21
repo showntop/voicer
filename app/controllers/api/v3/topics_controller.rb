@@ -80,6 +80,8 @@ module Api
         requires! :title
         requires! :body
         requires! :node_id
+        requires! :cover
+        requires! :source
 
         raise AccessDenied.new("当前登录的用户没有发帖权限，具体请参考官网的相关说明。") unless can?(:create, Topic)
 

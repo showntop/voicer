@@ -76,7 +76,10 @@ module Api
       end
 
       def current_user
-        @current_user #||= User.find_by_id(doorkeeper_token.resource_owner_id) if doorkeeper_token
+        return @current_user if params[:token].blank?
+        decoded_token = JWT.decode params[:token], nil, false 
+        logger.info(decoded_token)
+        @current_user ||= User.find_by_id(decoded_token[0]['user_id']) if decoded_token
       end
 
       def current_ability
