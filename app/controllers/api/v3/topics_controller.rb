@@ -22,7 +22,7 @@ module Api
 
         params[:type].downcase!
 
-        if params[:node_id].blank?
+        if params[:node_id].blank? || params[:node_id] == 'all'
           @topics = Topic
           if current_user
             @topics = @topics.without_nodes(current_user.block_node_ids)
