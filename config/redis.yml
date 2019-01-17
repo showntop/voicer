@@ -1,6 +1,7 @@
 defaults: &defaults
   host: 127.0.0.1
   port: 6379
+  password: ""
 
 development:
   <<: *defaults
@@ -9,5 +10,6 @@ test:
   <<: *defaults
 
 production:
-  host: redis-11438.c15.us-east-1-4.ec2.cloud.redislabs.com
-  port: 11438
+  host: redis-19756.c74.us-east-1-4.ec2.cloud.redislabs.com
+  port: 19756
+  password: abcd
