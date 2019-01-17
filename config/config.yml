@@ -63,7 +63,7 @@ defaults: &defaults
   upload_access_id: "FKj0IPQwM3gquMCFBSQjYI_1EGxb-8sASTh30--U" # or username
   upload_access_secret: "t938V-cIGD6GFZWhS2VxsVWmZ1S06lWVrFKgKtsS" # or upyun password
   upload_bucket: "journey"
-  bucket_domain: "oginbhz1c.bkt.clouddn.com"
+  bucket_domain: "kangclass.com"
   upload_aliyun_internal: false
   upload_aliyun_area: "cn-shanghai"
   mailer_provider: 'smtp'
