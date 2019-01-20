@@ -1,8 +1,12 @@
 production: &defaults
   adapter: redis
   url: redis://redis-19756.c74.us-east-1-4.ec2.cloud.redislabs.com:19756
+  host: redis-19756.c74.us-east-1-4.ec2.cloud.redislabs.com
+  port: 19756
   password: abcd
+  inline: true
   timeout: 1
+
   
 
 development:
